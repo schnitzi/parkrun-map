@@ -8,34 +8,77 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 import javax.imageio.ImageIO
+import kotlin.system.exitProcess
 
 
 const val DOT_DIAMETER = 35
 
-fun main() {
+fun main(args: Array<String>) {
 
-    val img = ImageIO.read(File("resources/source.png"))
-    val g = img.createGraphics()
+    val config = parseConfig(args)
 
-    //drawGridLines(g, img)
+    val background = ImageIO.read(File(config.backgroundImageFile))
+    val g = background.createGraphics()
 
-    val parkruns = readParkruns()
+    if (config.drawGridLines) {
+        drawGridLines(g, background)
+    }
 
-    drawStations(parkruns.keys, g)
+    val parkruns = readParkruns(config)
+
+    drawStations(config, parkruns.keys, g)
 
     drawIndex(parkruns, g)
 
     g.dispose()
 
-    ImageIO.write(img, "png", File("GreaterAngliaParkruns.png"))
+    val outputFileExtension = config.outputFile!!.substring(config.outputFile!!.lastIndexOf('.')+1)
+    ImageIO.write(background, outputFileExtension, File(config.outputFile))
 }
 
-private fun readParkruns() : Map<Station, List<Parkrun>> {
+private fun parseConfig(args: Array<String>): Config {
+
+    val config = Config()
+
+    var i = 0
+    while (i < args.size) {
+        when (args[i]) {
+            "-d" -> {
+                config.dataFile = args[i+1]
+                i += 2
+            }
+            "-b" -> {
+                config.backgroundImageFile = args[i+1]
+                i += 2
+            }
+            "-o" -> {
+                config.outputFile = args[i+1]
+                i += 2
+            }
+            "-m" -> {
+                config.maxBikeMinutes = args[i+1].toInt()
+                i += 2
+            }
+            "-g" -> {
+                config.drawGridLines = true
+            }
+        }
+    }
+
+    if (config.outputFile == null || config.dataFile == null || config.backgroundImageFile == null) {
+        System.err.println("Required parameter missing")
+        exitProcess(-1)
+    }
+
+    return config
+}
+
+private fun readParkruns(config: Config): Map<Station, List<Parkrun>> {
 
     val parkrunsByStation = mutableMapOf<Station, MutableList<Parkrun>>()
     val stationsByName = mutableMapOf<String, Station>()
 
-    val csvReader = BufferedReader(FileReader("resources/parkruns.csv"))
+    val csvReader = BufferedReader(FileReader(config.dataFile))
 
     csvReader.readLine()    // skip the header line
 
@@ -49,7 +92,7 @@ private fun readParkruns() : Map<Station, List<Parkrun>> {
 
         val bikeMinutes = data[6].toInt()
 
-        if (bikeMinutes <= 20) {
+        if (bikeMinutes <= config.maxBikeMinutes) {
             val stationName = data[2]
             var station = stationsByName[stationName]
             if (station == null) {
@@ -69,7 +112,7 @@ private fun readParkruns() : Map<Station, List<Parkrun>> {
     return parkrunsByStation
 }
 
-private fun drawStations(stations: Set<Station>, g: Graphics2D) {
+private fun drawStations(config: Config, stations: Set<Station>, g: Graphics2D) {
 
     g.font = Font("Arial", Font.PLAIN, 20)
     val fm = g.fontMetrics
@@ -133,3 +176,9 @@ private fun drawGridLines(g: Graphics2D, img: BufferedImage) {
 private data class Station(val name: String, var mapX: Int?, var mapY: Int?, val mapLabel: Int?)
 
 private data class Parkrun(val name: String, val location: String, val station: Station, val bikeMinutes: Int)
+
+private data class Config(var dataFile: String? = null,
+                          var backgroundImageFile: String? = null,
+                          var outputFile: String? = null,
+                          var maxBikeMinutes: Int = 20,
+                          var drawGridLines: Boolean = false)

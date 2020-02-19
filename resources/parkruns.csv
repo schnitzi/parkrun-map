@@ -1,0 +1,77 @@
+Parkrun	Location	Nearest station	X	Y	Label	Bike time
+Mile End	Mile End Park	Bethnal Green	250	2100	1	10
+Hackney Marshes	Hackney Marshes	Hackney Downs	251	1955	2	10
+Highbury Fields	Highbury Fields	Rectory Road	270	1870	3	15
+Finsbury	Finsbury Park	Stoke Newington	270	1825	4	10
+Walthamstow	Highams Park	Highams Park	645	1709	5	3
+Pymmes	Pymmes Park, Edmonton	Silver Street	268	1550	6	3
+Gunpowder	Gunpowder Park, Waltham Abbey	Enfield Lock	408	1430	7	7
+Grovelands	Grovelands Park, Enfield	Bush Hill Park	268	1415	8	17
+Barclay	Barclay Park	Broxbourne	405	1240	9	8
+Harlow	Harlow Town Park	Harlow Town	405	1138	10	4
+Westmill	Westmill Farm	Ware	295	1080	11	14
+Panshanger	Panshanger Farm	Hertford East	235	1025	12	15
+Castle Park	Castle Park	Bishop's Stortford	405	995	13	4
+Coldham's Common	Coldham's Common	Cambridge	410	585	14	9
+Cambridge	Milton Country Park	Cambridge North	405	540	15	7
+Ferry Meadows	Ferry Meadows Country Park	Peterborough	152	420	16	20
+Manor Field	Manor Field Leisure Centre, Whittlesea	Whittlesea	210	420	17	2
+March	Williamson Park	March	290	420	18	7
+Littleport	Littleport Recreation Ground	Littleport	405	320	19	5
+King's Lynn	The Walks	King's Lynn	405	200	20	1
+Brandon Country Park	Brandon Country Park	Brandon	590	330	21	10
+Thetford	Abbey Meadows	Thetford	645	330	22	2
+Bury St Edmunds	Nowton Park	Bury St Edmunds	700	475	23	14
+Catton	Catton Park	Norwich	1005	200	24	15
+Brundall	Countryside Park	Brundall	1135	315	25	5
+Lingwood	Lingwood Village Hall	Lingwood	1250	330	26	1
+Great Yarmouth North Beach	Great Yarmouth North Beach	Great Yarmouth	1535	330	27	7
+Lowestoft	Lowestoft Promenade	Lowestoft	1550	545	28	3
+Felixstowe	Undercliff Road West	Felixstowe	1540	880	29	5
+Ipswich	Chantry Park	Ipswich	1000	936	30	10
+Harwich	Cliff Park	Harwich Town	1540	965	31	3
+Highwoods	Highwoods Country Park	Colchester	1000	1160	32	8
+Clacton Seafront	Clacton Seafront	Clacton-on-Sea	1510	1347	33	6
+Great Cornard	Great Cornard Sports Centre	Sudbury	722	1030	34	7
+Great Notley	Great Notley Country Park	Braintree	803	1215	35	17
+Chelmsford Central	Chelmsford Central Park	Chelmsford	1005	1570	36	3
+Burnham-on-Crouch	Riverside Country Park	Burnham-on-Crouch	1410	1565	37	3
+South Woodham Ferrers	Marsh Farm Country Park	South Woodham Ferrers	1225	1662	38	8
+Hockley Woods	Hockley Woods	Hockley	1165	1815	39	5
+Hadleigh	Hadleigh Country Park	Rayleigh	1135	1780	40	20
+Billericay	Lake Meadows Park	Billericay	1005	1662	41	2
+Brentwood	Weald Country Park	Brentwood	887	1710	42	18
+Raphael	Raphael Park	Romford	722	1874	43	8
+Valentines	Valentines Park, Redbridge	Ilford	595	2000	44	6
+Wanstead	Wanstead Flats, Epping Forest	Manor Park	559	2040	45	4
+Sizewell	Beach Car Park	Saxmundham			aa	31
+Ally Pally	Alexandra Palace, Haringey	Bruce Grove			as	24
+Mersea Island	Cudmore Grove	Wivenhoe			as	48
+Swaffham	Nicolas Hamon Academy Sports Fields	Downham Market			b	72
+Basildon	Northlands Park	Wickford			bn	23
+Great Dunmow	The Recreation Ground	Stansted			df	39
+Hunstanton Promenade	Hunstanton North Promenade	King's Lynn			e	103
+Clare Castle	Clare Castle Country Park	Sudbury			er	52
+Harrow Lodge	Harrow Lodge	Romford			ey	13
+Holkham	Holkham Hall	Sheringham			f	104
+Sheringham	Sheringham Park	Sheringham			g	27
+Blickling	Blickling Park	Worsted			h	46
+Colchester Castle	Castle Park	Colchester			hj	9
+Victoria Dock	Victoria Dock	Stratford			ip	21
+Maldon Prom	Maldon Promenade Park	Hatfield Peverel			jk	38
+Roding Valley	Roding Valley Recreation Ground	Chingford			jl	28
+Sloughbottom	Sloughbottom Park	Norwich			o	16
+Colney Lane	UEA Colney Lane Playing Fields	Norwich			p	25
+Mulbarton	The Common, Mulbarton	Wymondham			q	32
+Fulbourn Hospital	Fulbourn Hospital	Cambridge			qw	16
+Loch Neaton	Loch Neaton	Attleborough			r	60
+Snowden Field	Snowden Field	Peterborough			t	45
+Beckton	Beckton District Park South	Manor Park			up	21
+Haverhill	Puddlebrook Playing Fields	Dullingham			we	67
+Soham Village	Soham Village College	Ely			x	36
+Southend	Gunners Park	Southend Victoria			xc	21
+Kesgrave	Millennium Jubilee Hall, Millenium Field	Derby Road			yu	22
+Thomas Mills	Thomas Mills High School	Wickham Market			z	38
+Barking	Barking Park	Ilford				12
+Norwich	Eaton Park	Norwich				18
+Gorleston Cliffs	Gorleston Cliffs Promenade	Great Yarmouth				20

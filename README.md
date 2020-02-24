@@ -10,7 +10,7 @@ You'll probably want to do multiple runs, adjusting the data file to correctly p
 markers.  To assist with this process, set the flag to generate the output file with
 marked grid lines.
 
-The program accepts these options:
+The executable class is org.computronium.parkrunmap.ParkrunMap.  The program accepts these options:
 
     -d FILE, --data FILE
         Read parkrun data from the given file.
@@ -31,5 +31,5 @@ The program accepts these options:
     -x INDEX_X, --index-x INDEX_X
         Put the map index at the given x coordinate.
 
-    -y INDEX_Y, --index-x INDEX_Y
+    -y INDEX_Y, --index-y INDEX_Y
         Put the map index at the given y coordinate.

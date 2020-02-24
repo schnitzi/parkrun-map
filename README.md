@@ -2,7 +2,7 @@
 
 A utility which generates a train map for area parkruns.  It takes a background train
 map [like this](resources/source.png) and a tab-delimited data file of parkrun location
-data [like this](resources/parkruns.csv) and produces a map like this:
+data [like this](resources/parkruns.tsv) and produces a map like this:
 
 ![East Anglia parkruns by train](output/GreaterAngliaParkruns.png)
 

@@ -1,7 +1,6 @@
 package org.computronium.parkrunmap
 
 import java.awt.Color
-import java.awt.Font
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
 import java.io.BufferedReader
@@ -9,8 +8,6 @@ import java.io.File
 import java.io.FileReader
 import javax.imageio.ImageIO
 
-
-const val DOT_DIAMETER = 35
 
 fun main(args: Array<String>) {
 
@@ -25,9 +22,9 @@ fun main(args: Array<String>) {
 
     val parkruns = readParkruns(config)
 
-    drawStations(parkruns.keys, g)
+    drawStations(config, parkruns.keys, g)
 
-    drawIndex(parkruns, g)
+    drawIndex(config, parkruns, g)
 
     g.dispose()
 
@@ -74,46 +71,44 @@ private fun readParkruns(config: Config): Map<Station, List<Parkrun>> {
     return parkrunsByStation
 }
 
-private fun drawStations(stations: Set<Station>, g: Graphics2D) {
+private fun drawStations(config: Config, stations: Set<Station>, g: Graphics2D) {
 
-    g.font = Font("Arial", Font.PLAIN, 20)
-    val fm = g.fontMetrics
+    g.font = config.dotFont
     for (station in stations) {
-        g.color = Color.MAGENTA
-        g.fillOval(station.mapX!! - DOT_DIAMETER/2, station.mapY!! - DOT_DIAMETER/2, DOT_DIAMETER, DOT_DIAMETER)
-        g.color = Color.WHITE
-        val label = station.mapLabel.toString()
-        g.drawString(label, station.mapX!! - fm.stringWidth(label)/2 + 1, station.mapY!! + fm.height/2 - 3)
+        drawDot(config, station.mapX!!, station.mapY!!, station.mapLabel.toString(), g)
     }
 }
 
-private fun drawIndex(parkruns: Map<Station, List<Parkrun>>, g: Graphics2D) {
+private fun drawDot(config: Config, x: Int, y: Int, label: String, g: Graphics2D) {
+    g.color = config.dotColor
+    g.fillOval(x - config.dotDiameter/2, y - config.dotDiameter/2, config.dotDiameter, config.dotDiameter)
+    g.color = config.dotTextColor
+    val fm = g.fontMetrics
+    g.drawString(label, x - fm.stringWidth(label)/2 + 1, y + fm.height/2 - 3)
+}
 
-    val x = 1700
-    var y = 40
+private fun drawIndex(config: Config, parkruns: Map<Station, List<Parkrun>>, g: Graphics2D) {
 
-    g.color = Color.BLACK
+    g.color = config.indexTextColor
+    g.font = config.indexTitleFont
 
-    g.font = Font("Arial", Font.BOLD, 30)
+    val x = config.indexX
+    var y = config.indexY
 
-    g.drawString("Station to parkrun", x-30, y)
+    g.drawString("Station to parkrun", x, y)
     y += 30
-    g.drawString("in bike minutes", x-30, y)
+    g.drawString("in bike minutes", x, y)
     y += 30
-    g.font = Font("Arial", Font.PLAIN, 20)
+    g.font = config.indexFont
 
     val fm = g.fontMetrics
     for (station in parkruns.keys.sortedBy { it.mapLabel }) {
-        g.color = Color.MAGENTA
-        g.fillOval(x - DOT_DIAMETER/2, y - DOT_DIAMETER/2, DOT_DIAMETER, DOT_DIAMETER)
-        g.color = Color.WHITE
-        val label = station.mapLabel.toString()
-        g.drawString(label, x - fm.stringWidth(label)/2 + 1, y + fm.height/2 - 3)
 
-        g.color = Color.BLACK
+        drawDot(config, x+30, y, station.mapLabel.toString(), g)
 
+        g.color = config.indexTextColor
         for (parkrun in parkruns[station] ?: error("whaaa")) {
-            g.drawString(parkrun.name + " " + parkrun.bikeMinutes, x + 30, y + fm.height/2 - 3)
+            g.drawString(parkrun.name + " " + parkrun.bikeMinutes, x + 60, y + fm.height/2 - 3)
             y += fm.height + 5
         }
 

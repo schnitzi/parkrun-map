@@ -3,9 +3,7 @@ package org.computronium.parkrunmap
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
-import java.io.BufferedReader
 import java.io.File
-import java.io.FileReader
 import javax.imageio.ImageIO
 
 
@@ -32,50 +30,11 @@ fun main(args: Array<String>) {
     ImageIO.write(background, outputFileExtension, File(config.outputFile))
 }
 
-private fun readParkruns(config: Config): Map<Station, List<Parkrun>> {
-
-    val parkrunsByStation = mutableMapOf<Station, MutableList<Parkrun>>()
-    val stationsByName = mutableMapOf<String, Station>()
-
-    val csvReader = BufferedReader(FileReader(config.dataFile))
-
-    csvReader.readLine()    // skip the header line
-
-    var row :String?
-
-    while (csvReader.readLine().also { row = it?.trim() } != null) {
-
-        println("row = $row")
-
-        val data: List<String> = row!!.split("\t")
-
-        val bikeMinutes = data[6].toInt()
-
-        if (bikeMinutes <= config.maxBikeMinutes) {
-            val stationName = data[2]
-            var station = stationsByName[stationName]
-            if (station == null) {
-                station = Station(stationName, data[3].toInt(), data[4].toInt(), data[5].toInt())
-                stationsByName[stationName] = station
-            }
-
-            var parkrunsAtStation = parkrunsByStation[station]
-            if (parkrunsAtStation == null) {
-                parkrunsAtStation = mutableListOf()
-                parkrunsByStation[station] = parkrunsAtStation
-            }
-
-            parkrunsAtStation.add(Parkrun(data[0], data[1], station, data[6].toInt()))
-        }
-    }
-    return parkrunsByStation
-}
-
 private fun drawStations(config: Config, stations: Set<Station>, g: Graphics2D) {
 
     g.font = config.dotFont
-    for (station in stations) {
-        drawDot(config, station.mapX!!, station.mapY!!, station.mapLabel.toString(), g)
+    for ((index, station) in stations.withIndex()) {
+        drawDot(config, station.mapX!!, station.mapY!!, (index+1).toString(), g)
     }
 }
 
@@ -102,9 +61,9 @@ private fun drawIndex(config: Config, parkruns: Map<Station, List<Parkrun>>, g: 
     g.font = config.indexFont
 
     val fm = g.fontMetrics
-    for (station in parkruns.keys.sortedBy { it.mapLabel }) {
+    for ((index, station) in parkruns.keys.withIndex()) {
 
-        drawDot(config, x+30, y, station.mapLabel.toString(), g)
+        drawDot(config, x+30, y, (index+1).toString(), g)
 
         g.color = config.indexTextColor
         for (parkrun in parkruns[station] ?: error("whaaa")) {
@@ -129,6 +88,6 @@ private fun drawGridLines(g: Graphics2D, img: BufferedImage) {
     }
 }
 
-private data class Station(val name: String, var mapX: Int?, var mapY: Int?, val mapLabel: Int?)
+data class Station(val name: String, var mapX: Int?, var mapY: Int?, val sortOrder: Float?)
 
-private data class Parkrun(val name: String, val location: String, val station: Station, val bikeMinutes: Int)
+data class Parkrun(val name: String, val location: String, val station: Station, val bikeMinutes: Int)

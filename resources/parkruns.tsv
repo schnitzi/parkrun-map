@@ -1,4 +1,4 @@
-Parkrun	Location	Nearest station	X	Y	Label	Bike time
+Parkrun	Location	Nearest station	X	Y	Sort	Bike time
 Mile End	Mile End Park	Bethnal Green	250	2100	1	10
 Hackney Marshes	Hackney Marshes	Hackney Downs	251	1955	2	10
 Highbury Fields	Highbury Fields	Rectory Road	270	1870	3	15
@@ -44,34 +44,34 @@ Brentwood	Weald Country Park	Brentwood	887	1710	42	18
 Raphael	Raphael Park	Romford	722	1874	43	8
 Valentines	Valentines Park, Redbridge	Ilford	595	2000	44	6
 Wanstead	Wanstead Flats, Epping Forest	Manor Park	559	2040	45	4
-Sizewell	Beach Car Park	Saxmundham			aa	31
-Ally Pally	Alexandra Palace, Haringey	Bruce Grove			as	24
-Mersea Island	Cudmore Grove	Wivenhoe			as	48
-Swaffham	Nicolas Hamon Academy Sports Fields	Downham Market			b	72
-Basildon	Northlands Park	Wickford			bn	23
-Great Dunmow	The Recreation Ground	Stansted			df	39
-Hunstanton Promenade	Hunstanton North Promenade	King's Lynn			e	103
-Clare Castle	Clare Castle Country Park	Sudbury			er	52
-Harrow Lodge	Harrow Lodge	Romford			ey	13
-Holkham	Holkham Hall	Sheringham			f	104
-Sheringham	Sheringham Park	Sheringham			g	27
-Blickling	Blickling Park	Worsted			h	46
-Colchester Castle	Castle Park	Colchester			hj	9
-Victoria Dock	Victoria Dock	Stratford			ip	21
-Maldon Prom	Maldon Promenade Park	Hatfield Peverel			jk	38
-Roding Valley	Roding Valley Recreation Ground	Chingford			jl	28
-Sloughbottom	Sloughbottom Park	Norwich			o	16
-Colney Lane	UEA Colney Lane Playing Fields	Norwich			p	25
-Mulbarton	The Common, Mulbarton	Wymondham			q	32
-Fulbourn Hospital	Fulbourn Hospital	Cambridge			qw	16
-Loch Neaton	Loch Neaton	Attleborough			r	60
-Snowden Field	Snowden Field	Peterborough			t	45
-Beckton	Beckton District Park South	Manor Park			up	21
-Haverhill	Puddlebrook Playing Fields	Dullingham			we	67
-Soham Village	Soham Village College	Ely			x	36
-Southend	Gunners Park	Southend Victoria			xc	21
-Kesgrave	Millennium Jubilee Hall, Millenium Field	Derby Road			yu	22
-Thomas Mills	Thomas Mills High School	Wickham Market			z	38
+Sizewell	Beach Car Park	Saxmundham				31
+Ally Pally	Alexandra Palace, Haringey	Bruce Grove				24
+Mersea Island	Cudmore Grove	Wivenhoe				48
+Swaffham	Nicolas Hamon Academy Sports Fields	Downham Market				72
+Basildon	Northlands Park	Wickford				23
+Great Dunmow	The Recreation Ground	Stansted				39
+Hunstanton Promenade	Hunstanton North Promenade	King's Lynn				103
+Clare Castle	Clare Castle Country Park	Sudbury				52
+Harrow Lodge	Harrow Lodge	Romford				13
+Holkham	Holkham Hall	Sheringham				104
+Sheringham	Sheringham Park	Sheringham				27
+Blickling	Blickling Park	Worsted				46
+Colchester Castle	Castle Park	Colchester				9
+Victoria Dock	Victoria Dock	Stratford				21
+Maldon Prom	Maldon Promenade Park	Hatfield Peverel				38
+Roding Valley	Roding Valley Recreation Ground	Chingford				28
+Sloughbottom	Sloughbottom Park	Norwich				16
+Colney Lane	UEA Colney Lane Playing Fields	Norwich				25
+Mulbarton	The Common, Mulbarton	Wymondham				32
+Fulbourn Hospital	Fulbourn Hospital	Cambridge				16
+Loch Neaton	Loch Neaton	Attleborough				60
+Snowden Field	Snowden Field	Peterborough				45
+Beckton	Beckton District Park South	Manor Park				21
+Haverhill	Puddlebrook Playing Fields	Dullingham				67
+Soham Village	Soham Village College	Ely				36
+Southend	Gunners Park	Southend Victoria				21
+Kesgrave	Millennium Jubilee Hall, Millenium Field	Derby Road				22
+Thomas Mills	Thomas Mills High School	Wickham Market				38
 Barking	Barking Park	Ilford				12
 Norwich	Eaton Park	Norwich				18
 Gorleston Cliffs	Gorleston Cliffs Promenade	Great Yarmouth				20

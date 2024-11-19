@@ -2,8 +2,11 @@ package org.computronium.parkrunmap
 
 import java.awt.Color
 import java.awt.Graphics2D
+import java.awt.GraphicsEnvironment
+import java.awt.RenderingHints
 import java.awt.image.BufferedImage
 import java.io.File
+import java.util.*
 import javax.imageio.ImageIO
 
 
@@ -13,15 +16,19 @@ fun main(args: Array<String>) {
 
     val background = ImageIO.read(File(config.backgroundImageFile))
     val g = background.createGraphics()
+//    g.scale(0.25, 0.25)
+    g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
 
     if (config.drawGridLines) {
         drawGridLines(g, background)
     }
 
-    val parkruns = readParkruns(config)
+    val stations = readStations(config)
 
-    drawStations(config, parkruns.keys, g)
+    val parkrunsLookup = readParkruns(config, stations)
+    drawParkruns(config, parkrunsLookup, g)
 
+    val parkruns = parkrunsLookup.values.flatten().sortedBy { it.abbreviation }
     drawIndex(config, parkruns, g)
 
     g.dispose()
@@ -30,48 +37,67 @@ fun main(args: Array<String>) {
     ImageIO.write(background, outputFileExtension, File(config.outputFile))
 }
 
-private fun drawStations(config: Config, stations: Set<Station>, g: Graphics2D) {
+private fun drawParkruns(config: Config, parkrunsLookup: SortedMap<Station, List<Parkrun>>, g: Graphics2D) {
 
     g.font = config.dotFont
-    for ((index, station) in stations.withIndex()) {
-        drawDot(config, station.mapX!!, station.mapY!!, (index+1).toString(), g)
+    for ((station, parkruns) in parkrunsLookup.entries) {
+        var x = station.mapX
+        for (parkrun in parkruns) {
+            drawDot(config, x, station.mapY, parkrun, g)
+            x += config.fontSize + 5
+        }
     }
 }
 
-private fun drawDot(config: Config, x: Int, y: Int, label: String, g: Graphics2D) {
-    g.color = config.dotColor
-    g.fillOval(x - config.dotDiameter/2, y - config.dotDiameter/2, config.dotDiameter, config.dotDiameter)
-    g.color = config.dotTextColor
-    val fm = g.fontMetrics
-    g.drawString(label, x - fm.stringWidth(label)/2 + 1, y + fm.height/2 - 3)
+fun makeColorMoreTransparent(color: Color, b: Int): Color {
+    require(b in 0..30) { "b must be in the range 0 to 30" }
+
+    // Calculate the new alpha value: 255 means fully opaque, lower values mean more transparent.
+    val alpha = (255 - (b / 30.0 * 255)).coerceIn(0.0, 255.0).toInt()
+
+    return Color(color.red, color.green, color.blue, alpha)
 }
 
-private fun drawIndex(config: Config, parkruns: Map<Station, List<Parkrun>>, g: Graphics2D) {
+private fun drawDot(config: Config, x: Int, y: Int, parkrun: Parkrun, g: Graphics2D) {
+    g.color = makeColorMoreTransparent(config.dotColor, parkrun.bikeMinutes)
+    g.fillOval(x - config.dotDiameter/2, y - config.dotDiameter/2, config.dotDiameter, config.dotDiameter)
+    g.color = config.dotTextColor
+
+    val fm = g.fontMetrics
+    g.drawString(parkrun.abbreviation, x - fm.stringWidth(parkrun.abbreviation)/2, y + fm.height/2 - 2)
+}
+
+private fun drawIndex(config: Config, parkruns: List<Parkrun>, g: Graphics2D) {
 
     g.color = config.indexTextColor
     g.font = config.indexTitleFont
 
-    val x = config.indexX
+    var x = config.indexX
     var y = config.indexY
 
     g.drawString("Station to parkrun", x, y)
-    y += 30
+    y += config.indexTitleFont.size + 10
     g.drawString("in bike minutes", x, y)
-    y += 30
+    y += config.indexTitleFont.size + 10
     g.font = config.indexFont
 
     val fm = g.fontMetrics
-    for ((index, station) in parkruns.keys.withIndex()) {
+    var count = 0
+    for (parkrun in parkruns) {
 
-        drawDot(config, x+30, y, (index+1).toString(), g)
+        drawDot(config, x+30, y, parkrun, g)
 
         g.color = config.indexTextColor
-        for (parkrun in parkruns[station] ?: error("whaaa")) {
-            g.drawString(parkrun.name + " " + parkrun.bikeMinutes, x + 60, y + fm.height/2 - 3)
-            y += fm.height + 5
-        }
+        g.drawString(parkrun.name + " " + parkrun.bikeMinutes, x + 45, y + fm.height/2 - 3)
 
-        y += 15
+        y += 17
+
+        count += 1
+        if (count > 40) {
+            x += 170
+            y = config.indexY
+            count = 0
+        }
     }
 }
 
@@ -88,6 +114,17 @@ private fun drawGridLines(g: Graphics2D, img: BufferedImage) {
     }
 }
 
-data class Station(val name: String, var mapX: Int?, var mapY: Int?, val sortOrder: Float?)
+data class Station(val name: String, var mapX: Int, var mapY: Int)
 
-data class Parkrun(val name: String, val location: String, val station: Station, val bikeMinutes: Int)
+data class Parkrun(val name: String, val location: String, val station: Station, val bikeMinutes: Int, val abbreviation: String)
+
+
+object ListFonts {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().availableFontFamilyNames
+        for (fontName in fontNames) {
+            println(fontName)
+        }
+    }
+}

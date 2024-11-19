@@ -1,10 +1,10 @@
 # Parkrun map generator
 
 A utility which generates a train map for area parkruns.  It takes a background train
-map [like this](resources/source.png) and a tab-delimited data file of parkrun location
-data [like this](resources/parkruns.tsv) and produces a map like this:
+map [like this](resources/great-northern-source.png) and a tab-delimited data file of parkrun location
+data [like this](resources/great-northern-parkruns.tsv) and produces a map like this:
 
-![East Anglia parkruns by train](output/GreaterAngliaParkruns.png)
+![East Anglia parkruns by train](output/archive/GreaterAngliaParkruns.png)
 
 You'll probably want to do multiple runs, adjusting the data file to correctly place the
 markers.  To assist with this process, set the flag to generate the output file with
@@ -61,3 +61,7 @@ marker numbers.
 
 Column 7: **Maximum bike time** -- Tells the generator to only show parkruns within this many minutes by bike from
 their nearest station.
+
+## Sources
+
+Original PDF: https://www.greatnorthernrail.com/destinations-and-offers/where-we-travel-to/our-routes

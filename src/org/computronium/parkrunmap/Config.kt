@@ -5,27 +5,33 @@ import java.awt.Font
 import kotlin.system.exitProcess
 
 data class Config(
-    val dataFile: String,
+    val parkrunsFile: String,
+    val stationsFile: String,
     val backgroundImageFile: String,
     val outputFile: String,
     val maxBikeMinutes: Int,
     val drawGridLines: Boolean,
+    val fontSize: Int,
     val indexX: Int,
-    val indexY: Int) {
+    val indexY: Int
+) {
 
-    val indexFont = Font("Arial", Font.PLAIN, 20)
-    val indexTitleFont = Font("Arial", Font.BOLD, 30)
+    val defaultFont = "DejaVu Sans"
+    val indexFont = Font(defaultFont, Font.PLAIN, fontSize)
+    val indexTitleFont = Font(defaultFont, Font.BOLD, fontSize + 5)
     val indexTextColor: Color = Color.BLACK
-    val dotFont = Font("Arial", Font.PLAIN, 20)
+    val dotFont = Font(defaultFont, Font.PLAIN, fontSize)
     val dotColor: Color = Color.MAGENTA
-    val dotDiameter = 35
+    val dotDiameter = fontSize + 6
     val dotTextColor: Color = Color.WHITE
 
-    data class Builder(var dataFile: String? = null,
+    data class Builder(var parkrunsFile: String? = null,
+                       var stationsFile: String? = null,
                        var backgroundImageFile: String? = null,
                        var outputFile: String? = null,
                        var maxBikeMinutes: Int = 20,
                        var drawGridLines: Boolean = false,
+                       var fontSize: Int = 20,
                        var indexX: Int = 0,
                        var indexY: Int = 0) {
 
@@ -35,7 +41,11 @@ data class Config(
             while (i < args.size) {
                 when (args[i]) {
                     "-d", "--data" -> {
-                        dataFile = args[i + 1]
+                        parkrunsFile = args[i + 1]
+                        i += 2
+                    }
+                    "-s", "--stations" -> {
+                        stationsFile = args[i + 1]
                         i += 2
                     }
                     "-b", "--background" -> {
@@ -54,6 +64,10 @@ data class Config(
                         drawGridLines = true
                         i += 1
                     }
+                    "-f", "--font-size" -> {
+                        fontSize = args[i + 1].toInt()
+                        i += 2
+                    }
                     "-x", "--index-x" -> {
                         indexX = args[i + 1].toInt()
                         i += 2
@@ -69,7 +83,7 @@ data class Config(
                 }
             }
 
-            if (outputFile == null || dataFile == null || backgroundImageFile == null) {
+            if (outputFile == null || stationsFile == null || backgroundImageFile == null) {
                 System.err.println("Required parameter missing")
                 exitProcess(-1)
             }
@@ -77,7 +91,7 @@ data class Config(
         }
 
         fun build(): Config {
-            return Config(dataFile!!, backgroundImageFile!!, outputFile!!, maxBikeMinutes, drawGridLines, indexX, indexY)
+            return Config(parkrunsFile!!, stationsFile!!, backgroundImageFile!!, outputFile!!, maxBikeMinutes, drawGridLines, fontSize, indexX, indexY)
         }
     }
 }

@@ -59,6 +59,8 @@ fun makeColorMoreTransparent(color: Color, b: Int): Color {
 }
 
 private fun drawDot(config: Config, x: Int, y: Int, parkrun: Parkrun, g: Graphics2D) {
+    g.color = Color.BLACK
+    g.fillOval(x - config.dotDiameter/2 + 1, y - config.dotDiameter/2 + 1, config.dotDiameter, config.dotDiameter)
     g.color = makeColorMoreTransparent(config.dotColor, parkrun.bikeMinutes)
     g.fillOval(x - config.dotDiameter/2, y - config.dotDiameter/2, config.dotDiameter, config.dotDiameter)
     g.color = config.dotTextColor
@@ -75,10 +77,11 @@ private fun drawIndex(config: Config, parkruns: List<Parkrun>, g: Graphics2D) {
     var x = config.indexX
     var y = config.indexY
 
-    g.drawString("Station to parkrun", x, y)
-    y += config.indexTitleFont.size + 10
-    g.drawString("in bike minutes", x, y)
-    y += config.indexTitleFont.size + 10
+    val titleLineHeight = config.indexTitleFont.size + 10
+    g.drawString("Station to parkrun", x + 30, y)
+    y += titleLineHeight
+    g.drawString("in bike minutes", x + 30, y)
+    y += titleLineHeight
     g.font = config.indexFont
 
     val fm = g.fontMetrics
@@ -90,12 +93,12 @@ private fun drawIndex(config: Config, parkruns: List<Parkrun>, g: Graphics2D) {
         g.color = config.indexTextColor
         g.drawString(parkrun.name + " " + parkrun.bikeMinutes, x + 45, y + fm.height/2 - 3)
 
-        y += 17
+        y += 19
 
         count += 1
-        if (count > 40) {
+        if (count > 35) {
             x += 170
-            y = config.indexY
+            y = config.indexY + 2 * titleLineHeight
             count = 0
         }
     }

@@ -22,7 +22,7 @@ data class Config(
     val indexTextColor: Color = Color.BLACK
     val dotFont = Font(defaultFont, Font.PLAIN, fontSize)
     val dotColor: Color = Color.MAGENTA
-    val dotDiameter = fontSize + 6
+    val dotDiameter = fontSize + 8
     val dotTextColor: Color = Color.WHITE
 
     data class Builder(var parkrunsFile: String? = null,

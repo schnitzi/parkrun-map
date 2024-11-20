@@ -1,0 +1,13 @@
+This is an official transport map of London, to which I've added an overlay of parkrun locations for your parkrun touristing adventures!
+
+Parkruns are shown as a pink dot by their nearest station.  The darker they appear, the further from the station you will have to travel.  You can look up each dot on the index on the right to get the name of the parkrun and a rough estimate of the number of minutes travel, by bike.
+
+Please use this map only as a jumping off point for your explorations, and bear in mind the following disclaimers:
+
+1.  There is a good chance you can reach many of these parkruns more efficiently by other means -- buses, other trains, or even other stations that might be more convenient, depending on where you are coming from.  Always check the best route via something like Google Maps before you set out.
+
+2.  Also check for train strikes, and cancellations due to events or weather before setting out.  Most runs have a Facebook page that is a generally reliable source of information.
+
+3.  The list of parkruns is constantly changing, so make sure the run you're heading for still exists!  This map was generated in November 2024, and probably still has mistakes.
+
+4.  Two runs -- Bushy (Bu) and Greenwich (Gw) -- are shown floating, as none of the stations shown on the map were close enough to recommend.  Other trains WILL get you to these runs, though; they are just lines that didn't get included on this map.
